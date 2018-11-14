@@ -1,0 +1,101 @@
+<?jelly escape-by-default='true'?>
+<!--
+  ~ Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+    <f:section title="Testgrid">
+
+        <div>
+            <f:entry title="Infrastructure Provisioning">
+                <f:entry>
+                    <f:optionalBlock name="useIncludeParameters" field="useIncludeParameters"
+                                     title="Include infrastructure" inline="true">
+                        <f:entry title="Include Parameters">
+                            <f:repeatableProperty field="includeParameters"
+                                                  add="Add Include Parameter">
+                                <f:repeatableDeleteButton/>
+                            </f:repeatableProperty>
+                        </f:entry>
+                    </f:optionalBlock>
+                    <!--</f:entry>-->
+
+                    <!--<f:entry>-->
+                    <f:optionalBlock name="useExcludeParameters" field="useExcludeParameters"
+                                     title="Exclude Infrastructure" inline="true">
+                        <f:entry title="Exclude Parameters">
+                            <f:repeatableProperty field="excludeParameters"
+                                                  add="Add Exclude Parameter" default="default">
+                                <f:repeatableDeleteButton/>
+                            </f:repeatableProperty>
+                        </f:entry>
+                    </f:optionalBlock>
+                </f:entry>
+
+
+                <f:entry title="Add new Infrastructure Provisioner..">
+                    <f:repeatableProperty field="infrastructureConfigs" default="default"
+                                          add="Add new Infrastructure Provisioner...">
+                        <f:entry title="">
+                            <div align="right">
+                                <f:repeatableDeleteButton/>
+                            </div>
+                        </f:entry>
+                    </f:repeatableProperty>
+                </f:entry>
+            </f:entry>
+        </div>
+
+        <f:entry title="Deployment provision step">
+            <f:repeatableProperty field="deploymentConfigs" add="Add new Deployment Provisioner..." default="default">
+                <f:entry title="">
+                    <div align="right">
+                        <f:repeatableDeleteButton/>
+                    </div>
+                </f:entry>
+            </f:repeatableProperty>
+        </f:entry>
+
+        <f:entry title="Scenario Configuration">
+
+            <f:entry field="scenarioGitURL" description="" title="Git URL">
+                <f:textbox/>
+            </f:entry>
+
+            <f:entry field="scenarioGitBranch" description="" title="Git Branch">
+                <f:textbox/>
+            </f:entry>
+
+            <f:entry field="scenarioTestType" title="Test Type">
+                <f:select/>
+            </f:entry>
+
+            <f:entry title="scenario list">
+                <f:repeatableProperty field="scenarioList" add="Add Scenarios..." default="true">
+                    <f:entry title="">
+                        <div align="left">
+                            <f:repeatableDeleteButton/>
+                        </div>
+                    </f:entry>
+                </f:repeatableProperty>
+            </f:entry>
+
+        </f:entry>
+
+    </f:section>
+
+</j:jelly>

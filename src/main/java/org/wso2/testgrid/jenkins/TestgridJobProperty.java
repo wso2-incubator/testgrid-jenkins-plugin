@@ -196,7 +196,7 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
                         script.setFile(scriptConfig.getFile());
                         Properties properties = new Properties();
                         Arrays.stream(scriptConfig.getParameters().split("\n")).forEach(s -> {
-                            String[] split = s.split(":");
+                            String[] split = s.split("=");
                             if (split.length == 2) {
                                 properties.setProperty(split[0].trim(), split[1].trim());
                             }
@@ -236,7 +236,7 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
                             script.setFile(deploymentPatternScript.getFile());
                             Properties properties = new Properties();
                             Arrays.stream(deploymentPatternScript.getParameters().split("\n")).forEach(s -> {
-                                String[] split = s.split(":");
+                                String[] split = s.split("=");
                                 if (split.length == 2) {
                                     properties.setProperty(split[0].trim(), split[1].trim());
                                 }

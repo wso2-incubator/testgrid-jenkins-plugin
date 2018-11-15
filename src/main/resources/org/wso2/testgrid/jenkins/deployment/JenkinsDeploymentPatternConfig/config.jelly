@@ -29,7 +29,7 @@
         <f:textbox/>
     </f:entry>
 
-    <f:entry title="deploymentPatternScripts">
+    <f:entry title="Deployment pattern scripts">
         <f:repeatableProperty field="deploymentPatternScripts" add="Add New Script..." default="true">
             <f:entry title="">
                 <div align="left">

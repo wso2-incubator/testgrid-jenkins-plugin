@@ -35,7 +35,7 @@
     </f:entry>
 
     <f:entry title="scripts">
-        <f:repeatableProperty field="scriptConfigs" add="Add scripts..." default="true">
+        <f:repeatableProperty field="scriptConfigs" add="Add scripts...">
             <f:entry title="">
                 <div align="left">
                     <f:repeatableDeleteButton/>

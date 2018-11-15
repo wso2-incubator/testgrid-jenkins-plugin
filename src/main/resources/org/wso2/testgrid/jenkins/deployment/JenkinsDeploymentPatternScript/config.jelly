@@ -31,7 +31,7 @@
         <f:textbox/>
     </f:entry>
 
-    <f:entry field="parameters" title="Custom Parameters">
+    <f:entry field="parameters" title="Input Parameters" description="Key value pairs seperated by = symbol">
         <f:textarea/>
     </f:entry>
 

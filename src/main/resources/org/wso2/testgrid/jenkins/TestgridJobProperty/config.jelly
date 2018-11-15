@@ -21,34 +21,9 @@
     <f:section title="Testgrid">
 
         <div>
-            <f:entry title="Infrastructure Provisioning">
-                <f:entry>
-                    <f:optionalBlock name="useIncludeParameters" field="useIncludeParameters"
-                                     title="Include infrastructure" inline="true">
-                        <f:entry title="Include Parameters">
-                            <f:repeatableProperty field="includeParameters"
-                                                  add="Add Include Parameter">
-                                <f:repeatableDeleteButton/>
-                            </f:repeatableProperty>
-                        </f:entry>
-                    </f:optionalBlock>
-                    <!--</f:entry>-->
-
-                    <!--<f:entry>-->
-                    <f:optionalBlock name="useExcludeParameters" field="useExcludeParameters"
-                                     title="Exclude Infrastructure" inline="true">
-                        <f:entry title="Exclude Parameters">
-                            <f:repeatableProperty field="excludeParameters"
-                                                  add="Add Exclude Parameter" default="default">
-                                <f:repeatableDeleteButton/>
-                            </f:repeatableProperty>
-                        </f:entry>
-                    </f:optionalBlock>
-                </f:entry>
-
-
-                <f:entry title="Add new Infrastructure Provisioner..">
-                    <f:repeatableProperty field="infrastructureConfigs" default="default"
+            <f:entry title="Infrastructure Provisioning..">
+                <f:entry title="Infrastructure config">
+                    <f:repeatableProperty field="infrastructureConfigs"
                                           add="Add new Infrastructure Provisioner...">
                         <f:entry title="">
                             <div align="right">
@@ -58,10 +33,33 @@
                     </f:repeatableProperty>
                 </f:entry>
             </f:entry>
+
+            <f:entry>
+                <f:optionalBlock name="useIncludeParameters" field="useIncludeParameters"
+                                 title="Include infrastructure" inline="true">
+                    <f:entry title="Include Parameters">
+                        <f:repeatableProperty field="includeParameters"
+                                              add="Add Include Parameter" default="default">
+                            <f:repeatableDeleteButton/>
+                        </f:repeatableProperty>
+                    </f:entry>
+                </f:optionalBlock>
+
+                <f:optionalBlock name="useExcludeParameters" field="useExcludeParameters"
+                                 title="Exclude Infrastructure" inline="true">
+                    <f:entry title="Exclude Parameters">
+                        <f:repeatableProperty field="excludeParameters"
+                                              add="Add Exclude Parameter" default="default">
+                            <f:repeatableDeleteButton/>
+                        </f:repeatableProperty>
+                    </f:entry>
+                </f:optionalBlock>
+            </f:entry>
+
         </div>
 
-        <f:entry title="Deployment provision step">
-            <f:repeatableProperty field="deploymentConfigs" add="Add new Deployment Provisioner..." default="default">
+        <f:entry title="Deployment provisioning..">
+            <f:repeatableProperty field="deploymentConfigs" add="Add new Deployment Provisioner..." >
                 <f:entry title="">
                     <div align="right">
                         <f:repeatableDeleteButton/>
@@ -70,7 +68,7 @@
             </f:repeatableProperty>
         </f:entry>
 
-        <f:entry title="Scenario Configuration">
+        <f:entry title="Scenario provisioning..">
 
             <f:entry field="scenarioGitURL" description="" title="Git URL">
                 <f:textbox/>
@@ -85,7 +83,7 @@
             </f:entry>
 
             <f:entry title="scenario list">
-                <f:repeatableProperty field="scenarioList" add="Add Scenarios..." default="true">
+                <f:repeatableProperty field="scenarioList" add="Add Scenarios..." >
                     <f:entry title="">
                         <div align="left">
                             <f:repeatableDeleteButton/>
@@ -93,9 +91,7 @@
                     </f:entry>
                 </f:repeatableProperty>
             </f:entry>
-
         </f:entry>
-
     </f:section>
 
 </j:jelly>

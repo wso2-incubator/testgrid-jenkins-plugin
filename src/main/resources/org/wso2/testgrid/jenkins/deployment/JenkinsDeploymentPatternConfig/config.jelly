@@ -19,7 +19,7 @@
 
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 
-    <f:entry field="name" description="" title="Deployment Pattern Name..">
+    <f:entry field="name" description="" title="Name">
         <f:textbox/>
     </f:entry>
     <f:entry field="description" description="" title="Description">
@@ -29,7 +29,11 @@
         <f:textbox/>
     </f:entry>
 
-    <f:entry title="Deployment pattern scripts">
+    <f:entry field="gitBranch" description="" title="Git Branch">
+        <f:textbox/>
+    </f:entry>
+
+    <f:entry title="Scripts">
         <f:repeatableProperty field="deploymentPatternScripts" add="Add New Script..." default="true">
             <f:entry title="">
                 <div align="left">

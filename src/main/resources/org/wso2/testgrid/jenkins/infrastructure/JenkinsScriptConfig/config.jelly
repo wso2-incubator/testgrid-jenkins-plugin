@@ -19,19 +19,19 @@
 
 <j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
 
-    <f:entry field="name" title="Script name" >
+    <f:entry field="name" title="Name" >
         <f:textbox />
     </f:entry>
+
+    <f:entry field="iacProvider" title="IAC Provider">
+        <f:select/>
+    </f:entry>
+
     <f:entry field="file" title="File">
         <f:textbox/>
     </f:entry>
     <f:entry field="description" title="Description">
         <f:textbox/>
-    </f:entry>
-
-    <f:entry field="iacProvider" title="Infrastructure as Code Provider"
-             description="Valid values: CLOUDFORMATION, SHELL">
-        <f:select/>
     </f:entry>
 
     <f:entry field="parameters" title="Input Parameters" description="Key value pairs seperated by = symbol">

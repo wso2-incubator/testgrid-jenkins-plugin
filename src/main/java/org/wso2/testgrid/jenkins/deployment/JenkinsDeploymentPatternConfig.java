@@ -38,6 +38,7 @@ public class JenkinsDeploymentPatternConfig implements Describable<JenkinsDeploy
     private String name;
     private String description;
     private String gitURL;
+    private String gitBranch;
     private List<JenkinsDeploymentPatternScript> deploymentPatternScripts;
 
     public String getName() {
@@ -56,12 +57,17 @@ public class JenkinsDeploymentPatternConfig implements Describable<JenkinsDeploy
         return gitURL;
     }
 
+    public String getGitBranch() {
+        return gitBranch;
+    }
+
     @DataBoundConstructor
-    public JenkinsDeploymentPatternConfig(String name, String description, List<JenkinsDeploymentPatternScript> deploymentPatternScripts,String gitURL) {
+    public JenkinsDeploymentPatternConfig(String name, String description, List<JenkinsDeploymentPatternScript> deploymentPatternScripts,String gitURL,String gitBranch) {
         this.name = name;
         this.description = description;
         this.gitURL = gitURL;
         this.deploymentPatternScripts = deploymentPatternScripts;
+        this.gitBranch = gitBranch;
     }
 
     @Override
@@ -80,6 +86,14 @@ public class JenkinsDeploymentPatternConfig implements Describable<JenkinsDeploy
         }
 
         public FormValidation doCheckGitURL(@QueryParameter String value){
+            if(value.isEmpty()){
+                return FormValidation.error("* Required Parameter..");
+            }else{
+                return FormValidation.ok();
+            }
+        }
+
+        public FormValidation doCheckGitBranch(@QueryParameter String value){
             if(value.isEmpty()){
                 return FormValidation.error("* Required Parameter..");
             }else{

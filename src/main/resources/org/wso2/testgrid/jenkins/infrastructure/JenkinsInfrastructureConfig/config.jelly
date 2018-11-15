@@ -30,11 +30,11 @@
     <f:entry field="gitBranch" description="" title="Git Branch">
         <f:textbox default="*/master"/>
     </f:entry>
-    <f:entry field="description" title="description">
+    <f:entry field="description" title="Description">
         <f:textbox/>
     </f:entry>
 
-    <f:entry title="scripts">
+    <f:entry title="Scripts">
         <f:repeatableProperty field="scriptConfigs" add="Add scripts...">
             <f:entry title="">
                 <div align="left">

@@ -75,7 +75,7 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
     private boolean useIncludeParameters;
     private boolean useExcludeParameters;
 
-    private final String testgridYaml;
+    private String testgridYaml = "UNDEFINED";
 
     /**
      * Data bound constructor receives all values via UI and perform
@@ -98,7 +98,11 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
         this.scenarioTestType = scenarioTestType;
         this.scenarioGitBranch = scenarioGitBranch;
         //save TestGrid yaml string content
-        this.testgridYaml = getTestGridYaml();
+
+        if(infrastructureConfigs != null && deploymentConfigs != null ){
+            this.testgridYaml = getTestGridYaml();
+        }
+
     }
 
     public List<JenkinsInfrastructureConfig> getInfrastructureConfigs() {
@@ -223,8 +227,11 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
                     pattern.setName(deploymentPatternConfig.getName());
                     pattern.setDescription(deploymentPatternConfig.getDescription());
                     pattern.setDir("."); //hard-coded
-                    pattern.setRemoteRepository(deploymentPatternConfig.getGitURL());
-
+                    if (deploymentPatternConfig.getGitBranch() != null) {
+                        pattern.setRemoteRepository("-b " + deploymentPatternConfig.getGitBranch() + " " + deploymentPatternConfig.getGitURL());
+                    } else {
+                        pattern.setRemoteRepository(deploymentPatternConfig.getGitURL());
+                    }
                     List<Script> deploymentScripts = new ArrayList<>();
 
                     List<JenkinsDeploymentPatternScript> deploymentPatternScripts = deploymentPatternConfig.getDeploymentPatternScripts();

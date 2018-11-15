@@ -21,7 +21,7 @@
     <f:section title="Testgrid">
 
         <div>
-            <f:entry title="Infrastructure Provisioning..">
+            <f:entry title="Infrastructure provisioner">
                 <f:entry title="Infrastructure config">
                     <f:repeatableProperty field="infrastructureConfigs"
                                           add="Add new Infrastructure Provisioner...">
@@ -36,20 +36,20 @@
 
             <f:entry>
                 <f:optionalBlock name="useIncludeParameters" field="useIncludeParameters"
-                                 title="Include infrastructure" inline="true">
-                    <f:entry title="Include Parameters">
+                                 title="Run only with" inline="true">
+                    <f:entry title="Environments">
                         <f:repeatableProperty field="includeParameters"
-                                              add="Add Include Parameter" default="default">
+                                              add="Add Environment.." default="default">
                             <f:repeatableDeleteButton/>
                         </f:repeatableProperty>
                     </f:entry>
                 </f:optionalBlock>
 
                 <f:optionalBlock name="useExcludeParameters" field="useExcludeParameters"
-                                 title="Exclude Infrastructure" inline="true">
-                    <f:entry title="Exclude Parameters">
+                                 title="Don't run with" inline="true">
+                    <f:entry title="Environments">
                         <f:repeatableProperty field="excludeParameters"
-                                              add="Add Exclude Parameter" default="default">
+                                              add="Add Environment..." default="default">
                             <f:repeatableDeleteButton/>
                         </f:repeatableProperty>
                     </f:entry>
@@ -58,7 +58,7 @@
 
         </div>
 
-        <f:entry title="Deployment provisioning..">
+        <f:entry title="Deployment Configuration">
             <f:repeatableProperty field="deploymentConfigs" add="Add new Deployment Provisioner..." >
                 <f:entry title="">
                     <div align="right">
@@ -68,7 +68,7 @@
             </f:repeatableProperty>
         </f:entry>
 
-        <f:entry title="Scenario provisioning..">
+        <f:entry title="Tests">
 
             <f:entry field="scenarioGitURL" description="" title="Git URL">
                 <f:textbox/>
@@ -78,11 +78,11 @@
                 <f:textbox/>
             </f:entry>
 
-            <f:entry field="scenarioTestType" title="Test Type">
+            <f:entry field="scenarioTestType" title="Type">
                 <f:select/>
             </f:entry>
 
-            <f:entry title="scenario list">
+            <f:entry title="Scenarios">
                 <f:repeatableProperty field="scenarioList" add="Add Scenarios..." >
                     <f:entry title="">
                         <div align="left">

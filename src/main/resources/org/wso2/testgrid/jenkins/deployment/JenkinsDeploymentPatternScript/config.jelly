@@ -19,15 +19,15 @@
 
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 
-    <f:entry field="name" description="" title="Script Name">
+    <f:entry field="name" description="" title="Name">
         <f:textbox/>
     </f:entry>
 
-    <f:entry field="type" title="Deployemt script Type">
+    <f:entry field="type" title="Type">
         <f:select/>
     </f:entry>
 
-    <f:entry field="file" description="" title="File Name">
+    <f:entry field="file" description="" title="File">
         <f:textbox/>
     </f:entry>
 

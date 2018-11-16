@@ -77,8 +77,18 @@ public class JenkinsInfrastructureConfig implements Describable<JenkinsInfrastru
         return description;
     }
 
+    /**
+     * Static inner class that extends the {@link Descriptor} class to provide the
+     * metadata for the {@link JenkinsInfrastructureConfig} UI describable class.
+     */
     public static class DescriptorImpl extends Descriptor<JenkinsInfrastructureConfig> {
 
+        /**
+         * Validates the name value entered by the user.
+         *
+         * @param value
+         * @return
+         */
         public FormValidation doCheckName(@QueryParameter String value){
             if(value.isEmpty()){
                 return FormValidation.error("* Required Parameter..");
@@ -102,7 +112,6 @@ public class JenkinsInfrastructureConfig implements Describable<JenkinsInfrastru
                 return FormValidation.ok();
             }
         }
-
 
         @Override
         public String getDisplayName() {

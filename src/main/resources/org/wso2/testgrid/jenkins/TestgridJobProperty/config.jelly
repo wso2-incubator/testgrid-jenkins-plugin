@@ -32,66 +32,78 @@
                         </f:entry>
                     </f:repeatableProperty>
                 </f:entry>
-            </f:entry>
 
-            <f:entry>
-                <f:optionalBlock name="useIncludeParameters" field="useIncludeParameters"
-                                 title="Run only with" inline="true">
-                    <f:entry title="Environments">
-                        <f:repeatableProperty field="includeParameters"
-                                              add="Add Environment.." default="default">
-                            <f:repeatableDeleteButton/>
-                        </f:repeatableProperty>
+                <f:advanced align="left">
+                    <f:entry>
+                        <f:optionalBlock name="useIncludeParameters" field="useIncludeParameters"
+                                         title="Run only with" inline="true">
+                            <f:entry title="Environments">
+                                <f:repeatableProperty field="includeParameters"
+                                                      add="Add Environment.." default="default">
+                                    <f:repeatableDeleteButton/>
+                                </f:repeatableProperty>
+                            </f:entry>
+                        </f:optionalBlock>
                     </f:entry>
-                </f:optionalBlock>
-
-                <f:optionalBlock name="useExcludeParameters" field="useExcludeParameters"
-                                 title="Don't run with" inline="true">
-                    <f:entry title="Environments">
-                        <f:repeatableProperty field="excludeParameters"
-                                              add="Add Environment..." default="default">
-                            <f:repeatableDeleteButton/>
-                        </f:repeatableProperty>
+                    <f:entry>
+                        <f:optionalBlock name="useExcludeParameters" field="useExcludeParameters"
+                                         title="Don't run with" inline="true">
+                            <f:entry title="Environments">
+                                <f:repeatableProperty field="excludeParameters"
+                                                      add="Add Environment..." default="default">
+                                    <f:repeatableDeleteButton/>
+                                </f:repeatableProperty>
+                            </f:entry>
+                        </f:optionalBlock>
                     </f:entry>
-                </f:optionalBlock>
-            </f:entry>
+                </f:advanced>
 
+            </f:entry>
         </div>
 
-        <f:entry title="Deployment Configuration">
-            <f:repeatableProperty field="deploymentConfigs" add="Add new Deployment Provisioner..." >
-                <f:entry title="">
-                    <div align="right">
-                        <f:repeatableDeleteButton/>
-                    </div>
-                </f:entry>
-            </f:repeatableProperty>
-        </f:entry>
-
-        <f:entry title="Tests">
-
-            <f:entry field="scenarioGitURL" description="" title="Git URL">
-                <f:textbox/>
-            </f:entry>
-
-            <f:entry field="scenarioGitBranch" description="" title="Git Branch">
-                <f:textbox/>
-            </f:entry>
-
-            <f:entry field="scenarioTestType" title="Type">
-                <f:select/>
-            </f:entry>
-
-            <f:entry title="Scenarios">
-                <f:repeatableProperty field="scenarioList" add="Add Scenarios..." >
+        <div>
+            <f:entry title="Deployment Configuration">
+                <f:repeatableProperty field="deploymentConfigs" add="Add new Deployment Provisioner..." >
                     <f:entry title="">
-                        <div align="left">
+                        <div align="right">
                             <f:repeatableDeleteButton/>
                         </div>
                     </f:entry>
                 </f:repeatableProperty>
             </f:entry>
+        </div>
+
+        <f:block>
+            <f:entry title="Tests">
+
+                <f:entry field="scenarioGitURL" description="" title="Git URL">
+                    <f:textbox/>
+                </f:entry>
+
+                <f:entry field="scenarioGitBranch" description="" title="Git Branch">
+                    <f:textbox/>
+                </f:entry>
+
+                <f:entry field="scenarioTestType" title="Type">
+                    <f:select/>
+                </f:entry>
+
+                <f:entry title="Scenarios">
+                    <f:repeatableProperty field="scenarioList" add="Add Scenarios..." >
+                        <f:entry title="">
+                            <div align="left">
+                                <f:repeatableDeleteButton/>
+                            </div>
+                        </f:entry>
+                    </f:repeatableProperty>
+                </f:entry>
+            </f:entry>
+        </f:block>
+
+        <f:entry field="emailToList" description="Comma separated list of email addresses" title="Report Email recipient list">
+            <f:textbox/>
         </f:entry>
+
     </f:section>
 
 </j:jelly>

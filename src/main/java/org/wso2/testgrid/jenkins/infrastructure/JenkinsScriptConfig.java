@@ -97,11 +97,14 @@ public class JenkinsScriptConfig implements Describable<JenkinsScriptConfig>{
         return DESCRIPTOR;
     }
 
+    /**
+     * Static inner class that extends the {@link Descriptor} class to provide the
+     * metadata for the {@link JenkinsScriptConfig} UI describable class.
+     */
     public static class DescriptorImpl extends Descriptor<JenkinsScriptConfig>{
 
         /**
-         * Method called by Jenkins internaly to populate the
-         * iacProvider comboBox
+         * Method called by Jenkins internally to populate the iacProvider comboBox
          *
          */
         public ListBoxModel doFillIacProviderItems(){
@@ -111,6 +114,13 @@ public class JenkinsScriptConfig implements Describable<JenkinsScriptConfig>{
             return model;
         }
 
+        /**
+         * Validate the name entered by the user. This implementation checks if it is empty,
+         * and prompts the user.
+         *
+         * @param value name  value entered by the user
+         * @return the a positive {@link FormValidation} result if it is not empty, else a negative result.
+         */
         public FormValidation doCheckName(@QueryParameter String value){
             if(value.isEmpty()){
                 return FormValidation.error("* Required Parameter..");
@@ -119,6 +129,12 @@ public class JenkinsScriptConfig implements Describable<JenkinsScriptConfig>{
             }
         }
 
+        /**
+         * Validate the file name entered by the user. This implementation checks if it is empty,
+         * and prompts the user.
+         *
+         * @param value file name  value entered by the user
+         * @return the a positive {@link FormValidation} result if it is not empty, else a negative result.         */
         public FormValidation doCheckFile(@QueryParameter String value){
             if(value.isEmpty()){
                 return FormValidation.error("* Required Parameter..");

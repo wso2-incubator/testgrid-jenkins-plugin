@@ -62,7 +62,8 @@ public class JenkinsDeploymentPatternConfig implements Describable<JenkinsDeploy
     }
 
     @DataBoundConstructor
-    public JenkinsDeploymentPatternConfig(String name, String description, List<JenkinsDeploymentPatternScript> deploymentPatternScripts,String gitURL,String gitBranch) {
+    public JenkinsDeploymentPatternConfig(String name, String description, List<JenkinsDeploymentPatternScript> deploymentPatternScripts,
+                                          String gitURL,String gitBranch) {
         this.name = name;
         this.description = description;
         this.gitURL = gitURL;
@@ -75,8 +76,19 @@ public class JenkinsDeploymentPatternConfig implements Describable<JenkinsDeploy
         return DESCRIPTOR;
     }
 
+    /**
+     * Static inner class that extends the {@link Descriptor} class to provide the
+     * metadata for the {@link JenkinsDeploymentPatternConfig} UI describable class.
+     */
     public static class DescriptorImpl extends Descriptor<JenkinsDeploymentPatternConfig>{
 
+        /**
+         * Validate the name entered by the user. This implementation checks if it is empty,
+         * and prompts the user.
+         *
+         * @param value name  value entered by the user
+         * @return the a positive {@link FormValidation} result if it is not empty, else a negative result.
+         */
         public FormValidation doCheckName(@QueryParameter String value){
             if(value.isEmpty()){
                 return FormValidation.error("* Required Parameter..");
@@ -85,6 +97,13 @@ public class JenkinsDeploymentPatternConfig implements Describable<JenkinsDeploy
             }
         }
 
+        /**
+         * Validate the gitURl entered by the user. This implementation checks if it is empty,
+         * and prompts the user.
+         *
+         * @param value String value provided by the gitURL field.
+         * @return the a positive {@link FormValidation} result if it is not empty, else a negative result.
+         */
         public FormValidation doCheckGitURL(@QueryParameter String value){
             if(value.isEmpty()){
                 return FormValidation.error("* Required Parameter..");
@@ -93,6 +112,13 @@ public class JenkinsDeploymentPatternConfig implements Describable<JenkinsDeploy
             }
         }
 
+        /**
+         * Validate the gitBranch entered by the user. This implementation checks if it is empty,
+         * and prompts the user.
+         *
+         * @param value gitBranch value entered by the user
+         * @return the a positive {@link FormValidation} result if it is not empty, else a negative result.
+         */
         public FormValidation doCheckGitBranch(@QueryParameter String value){
             if(value.isEmpty()){
                 return FormValidation.error("* Required Parameter..");

@@ -74,8 +74,11 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
     private List<ExcludeParameter> excludeParameters;
     private boolean useIncludeParameters;
     private boolean useExcludeParameters;
+    private String emailToList;
 
     private String testgridYaml = "UNDEFINED";
+    private static final String TESTNG = "TESTNG";
+    private static final String INTEGRATION = "INTEGRAION";
 
     /**
      * Data bound constructor receives all values via UI and perform
@@ -85,7 +88,7 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
     public TestgridJobProperty(List<JenkinsInfrastructureConfig> infrastructureConfigs, List<JenkinsDeploymentConfig> deploymentConfigs
             , List<IncludeParameter> includeParameters, List<ExcludeParameter> excludeParameters,
                                boolean useIncludeParameters, boolean useExcludeParameters, List<JenkinsScenario> scenarioList, String scenarioGitURL, String scenarioTestType
-            , String scenarioGitBranch) {
+            , String scenarioGitBranch,String emailToList) {
 
         this.infrastructureConfigs = infrastructureConfigs;
         this.deploymentConfigs = deploymentConfigs;
@@ -97,12 +100,12 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
         this.scenarioGitURL = scenarioGitURL;
         this.scenarioTestType = scenarioTestType;
         this.scenarioGitBranch = scenarioGitBranch;
+        this.emailToList = emailToList;
         //save TestGrid yaml string content
 
-        if(infrastructureConfigs != null && deploymentConfigs != null ){
+        if(infrastructureConfigs != null ){
             this.testgridYaml = getTestGridYaml();
         }
-
     }
 
     public List<JenkinsInfrastructureConfig> getInfrastructureConfigs() {
@@ -147,6 +150,10 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
 
     public String getScenarioGitBranch() {
         return scenarioGitBranch;
+    }
+
+    public String getEmailToList() {
+        return emailToList;
     }
 
     /**
@@ -200,7 +207,7 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
                         script.setFile(scriptConfig.getFile());
                         Properties properties = new Properties();
                         Arrays.stream(scriptConfig.getParameters().split("\n")).forEach(s -> {
-                            String[] split = s.split("=");
+                            String[] split = s.trim().split("=");
                             if (split.length == 2) {
                                 properties.setProperty(split[0].trim(), split[1].trim());
                             }
@@ -243,7 +250,7 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
                             script.setFile(deploymentPatternScript.getFile());
                             Properties properties = new Properties();
                             Arrays.stream(deploymentPatternScript.getParameters().split("\n")).forEach(s -> {
-                                String[] split = s.split("=");
+                                String[] split = s.trim().split("=");
                                 if (split.length == 2) {
                                     properties.setProperty(split[0].trim(), split[1].trim());
                                 }
@@ -267,6 +274,7 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
         } else {
             tgScenarioConfig.setRemoteRepository(scenarioGitURL);
         }
+        scenarioTestType = mapTestType(scenarioTestType);
         tgScenarioConfig.setTestType(scenarioTestType);
         List<TestScenario> testScenarios = new ArrayList<>();
 
@@ -297,13 +305,27 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
                 }
             }
         };
+        representer.addClassTag(TestgridYaml.class,Tag.MAP);
 
         //Dumper options set to achieve proper yaml format
         DumperOptions options = new DumperOptions();
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         Yaml yaml = new Yaml(representer,options);
-
         return yaml.dump(testgridYaml);
+    }
+
+    /**
+     * Map the TestType to match the test types to TestGrid internal values
+     * TODO : handle this mapping from testgrid internally.
+     * @param testType Test Type selected from UI
+     * @return Mapped Test Type
+     */
+    private String mapTestType(String testType){
+        switch (testType){
+            case TESTNG : return INTEGRATION;
+
+            default: return INTEGRATION;
+        }
     }
 
     @Symbol("testgrid")
@@ -329,7 +351,7 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
 
         public ListBoxModel doFillScenarioTestTypeItems() {
             ListBoxModel model = new ListBoxModel();
-            model.add(new ListBoxModel.Option("INTEGRATION"));
+            model.add(new ListBoxModel.Option(TESTNG));
             return model;
         }
 
@@ -356,9 +378,22 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
                 return FormValidation.ok();
             }
         }
+
+        public FormValidation doCheckEmailToList(@QueryParameter String value){
+            if(value.isEmpty()){
+                return FormValidation.error("* Required Parameter..");
+            }else{
+                return FormValidation.ok();
+            }
+        }
     }
 
 
+    /**
+     * This class defines the UI  that adds the infrastructure parameters to the
+     * Includes section of the testgrid.yaml
+     *
+     */
     public static class IncludeParameter implements Describable<IncludeParameter> {
 
         private String includeParameter;
@@ -377,10 +412,18 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
             return Jenkins.getInstance().getDescriptor(getClass());
         }
 
+        /**
+         * Descriptor implementation required by the Jenkins runtime.
+         */
         @Extension
         public static class ParameterDescriptorImpl extends Descriptor<IncludeParameter> {}
     }
 
+    /**
+     * This class defines the UI that adds the infrastructure parameters to the
+     * Excludes section of the testgrid.yaml
+     *
+     */
     public static class ExcludeParameter implements Describable<ExcludeParameter> {
 
         private String excludeParameter;
@@ -399,6 +442,9 @@ public final class TestgridJobProperty extends JobProperty<Job<?, ?>> {
             return Jenkins.getInstance().getDescriptor(getClass());
         }
 
+        /**
+         * Descriptor implementation required by the Jenkins runtime.
+         */
         @Extension
         public static class ParameterDescriptorImpl extends Descriptor<ExcludeParameter> {}
     }

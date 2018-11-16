@@ -72,6 +72,10 @@ public class JenkinsDeploymentPatternScript implements Describable<JenkinsDeploy
     }
 
 
+    /**
+     * Static inner class that extends the {@link Descriptor} class to provide the
+     * metadata for the {@link JenkinsDeploymentPatternScript} UI describable class.
+     */
     public static class DescriptorImpl extends Descriptor<JenkinsDeploymentPatternScript>{
 
         @Nonnull
@@ -80,12 +84,26 @@ public class JenkinsDeploymentPatternScript implements Describable<JenkinsDeploy
             return"Deployment Pattern Script";
         }
 
-        public ListBoxModel doFillTypeItems() throws IOException {
+        /**
+         * This method is internally executed by the Jenkins runtime to populate the the Items
+         * for combo box.
+         *
+         * @return {@link ListBoxModel} object populated with combo box entries.
+         *
+         */
+        public ListBoxModel doFillTypeItems() {
             ListBoxModel model = new ListBoxModel();
             model.add(new ListBoxModel.Option("SHELL"));
             return model;
         }
 
+        /**
+         * Validate the name entered by the user. This implementation checks if it is empty,
+         * and prompts the user.
+         *
+         * @param value name value entered by the user
+         * @return the a positive {@link FormValidation} result if it is not empty, else a negative result.
+         */
         public FormValidation doCheckName(@QueryParameter String value){
             if(value.isEmpty()){
                 return FormValidation.error("* Required Parameter..");
@@ -94,6 +112,13 @@ public class JenkinsDeploymentPatternScript implements Describable<JenkinsDeploy
             }
         }
 
+        /**
+         * Validate the file name entered by the user. This implementation checks if it is empty,
+         * and prompts the user.
+         *
+         * @param value file name entered by the user.
+         * @return the a positive {@link FormValidation} result if it is not empty, else a negative result.
+         */
         public FormValidation doCheckFile(@QueryParameter String value){
             if(value.isEmpty()){
                 return FormValidation.error("* Required Parameter..");

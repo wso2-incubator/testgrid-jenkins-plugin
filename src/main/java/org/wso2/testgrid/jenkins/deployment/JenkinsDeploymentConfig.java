@@ -50,6 +50,10 @@ public class JenkinsDeploymentConfig implements Describable<JenkinsDeploymentCon
     @Extension
     public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
+    /**
+     * Static inner class that extends the {@link Descriptor} class to provide the
+     * metadata for the {@link JenkinsDeploymentConfig} UI describable class.
+     */
     public static class DescriptorImpl extends Descriptor<JenkinsDeploymentConfig>{
 
         @Nonnull
